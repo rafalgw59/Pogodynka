@@ -6,6 +6,7 @@ use App\Entity\Location;
 use App\Entity\Measurement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr;
 
 /**
  * @extends ServiceEntityRepository<Measurement>
@@ -22,14 +23,16 @@ class MeasurementRepository extends ServiceEntityRepository
         parent::__construct($registry, Measurement::class);
     }
 
-    public function findByLocation(Location $city,Location $country){
+    public function findByLocation($city,$country)
+    {
         $qb = $this->createQueryBuilder('m');
-        $qb->where('m.city = :city')
-            ->andWhere('m.country = :country')
-            ->setParameter('city', $city)
-            ->setParameter('country', $country)
-            ->andWhere('m.date > :now')
-            ->setParameter('now', date('Y-m-d'));
+        $qb->where('m.date > :now')
+            ->setParameter('now', date('Y-m-d'))
+            ->join('m.location', 'l','WITH', 'l.id=m.location')
+            ->andWhere('l.city = :city')
+            ->setParameter('city',$city)
+            ->andWhere('l.country = :country')
+            ->setParameter('country',$country);
         $query = $qb->getQuery();
         $result = $query->getResult();
         return $result;
