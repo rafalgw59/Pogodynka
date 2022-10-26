@@ -15,9 +15,9 @@ class LocationType extends AbstractType
         $builder
             ->add('country', ChoiceType::class, [
                 'choices'  => [
-                    'PL' => "Polska",
-                    'DE' => "Niemcy",
-                    'LOL' => "Lololand",
+                    'Polska' => "PL",
+                    'Nimecy' => "DE",
+                    'Lololand' => "LL",
                 ],
                 ])
             ->add('city')
