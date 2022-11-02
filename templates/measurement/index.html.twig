@@ -34,7 +34,9 @@
                 <td>{{ measurement.windDirection }}</td>
                 <td>
                     <a href="{{ path('app_measurement_show', {'id': measurement.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

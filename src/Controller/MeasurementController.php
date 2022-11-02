@@ -6,6 +6,7 @@ use App\Entity\Location;
 use App\Entity\Measurement;
 use App\Form\MeasurementType;
 use App\Repository\MeasurementRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MeasurementController extends AbstractController
 {
 
-
+    #[isGranted("ROLE_MEASUREMENT_INDEX")]
     #[Route('/', name: 'app_measurement_index', methods: ['GET'])]
     public function index(MeasurementRepository $measurementRepository): Response
     {
@@ -23,7 +24,7 @@ class MeasurementController extends AbstractController
             'measurements' => $measurementRepository->findAll(),
         ]);
     }
-
+    #[isGranted("ROLE_MEASUREMENT_NEW")]
     #[Route('/new', name: 'app_measurement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MeasurementRepository $measurementRepository): Response
     {
@@ -44,7 +45,7 @@ class MeasurementController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[isGranted("ROLE_MEASUREMENT_SHOW")]
     #[Route('/{id}', name: 'app_measurement_show', methods: ['GET'])]
     public function show(Measurement $measurement): Response
     {
@@ -52,7 +53,7 @@ class MeasurementController extends AbstractController
             'measurement' => $measurement,
         ]);
     }
-
+    #[isGranted("ROLE_MEASUREMENT_EDIT")]
     #[Route('/{id}/edit', name: 'app_measurement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Measurement $measurement, MeasurementRepository $measurementRepository): Response
     {
@@ -72,7 +73,7 @@ class MeasurementController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[isGranted("ROLE_MEASUREMENT_DELETE")]
     #[Route('/{id}', name: 'app_measurement_delete', methods: ['POST'])]
     public function delete(Request $request, Measurement $measurement, MeasurementRepository $measurementRepository): Response
     {
