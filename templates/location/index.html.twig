@@ -3,6 +3,8 @@
 {% block title %}Location index{% endblock %}
 
 {% block body %}
+    <h2>Witaj: {{ user.email }}</h2>
+    <a href="{{ path('logout') }}">Wyloguj</a>
     <a href="{{ path('app_measurement_index') }}">Measurements</a>
     <h1>Location index</h1>
 
