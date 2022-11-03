@@ -39,6 +39,36 @@ class LocationRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByLocation($location){
+        $qb = $this->createQueryBuilder('m');
+        $qb->where('m.location = :location')
+            ->setParameter('location',$location)
+            ->andWhere('m.date>:now')
+            ->setParameter('now',date('Y-m-d'));
+        $query = $qb->getQuery();
+
+        $result = $query->getResult();
+        return $result;
+    }
+    public function findByCountryAndCity($city,$country): ?Location
+    {
+        $qb = $this->createQueryBuilder('l');
+        $qb->where('l.country = :country')
+            ->andWhere('l.city = :city')
+            ->setParameter('country',$country)
+            ->setParameter('city', $city);
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+//        if (count($result)>1){
+//            return $result[0];
+//        }else{
+//            return $result;
+//        }
+
+        return $result;
+
+    }
+
 //    /**
 //     * @return Location[] Returns an array of Location objects
 //     */
