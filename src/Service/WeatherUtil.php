@@ -19,9 +19,7 @@ class WeatherUtil{
     public function getWeatherForCountryAndCity($country,$city){
         $location = $this->locationRepository->findByCountryAndCity($city,$country);
         $measurements = $this->getWeatherForLocation($location);
-        $result["location"] = $location;
-        $result["measurements"] = $measurements;
-        return $result;
+        return $measurements;
     }
     public function getWeatherForLocation($location){
         $measurements = $this->measurementRepository->findByLocation($location);

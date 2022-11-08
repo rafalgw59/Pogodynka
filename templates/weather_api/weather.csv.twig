@@ -1,0 +1,11 @@
+city,country,date,celsius,humidity,uv_index,wind_speed,wind_direction
+{% for weather in weathers %}
+{{ city }},
+{{- country }},
+{{- weather.date|date('Y-m-d') }},
+{{- weather.temperature }},
+{{- weather.humidity }},
+{{- weather.uvIndex }},
+{{- weather.windSpeed }},
+{{- weather.windDirection }}
+{% endfor %}

@@ -57,7 +57,7 @@ class CityAndCountryCommand extends Command
             return -1;
         }
         $data = array();
-        foreach ($results['measurements'] as $result){
+        foreach ($results as $result){
             $resu['id'] = $result->getId();
             $resu['temperature'] = $result->getTemperature();
             $resu['precipitation']= $result->getPrecipitation();

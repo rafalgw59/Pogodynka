@@ -39,6 +39,7 @@ class Measurement
     #[ORM\Column(length: 255)]
     private ?string $wind_direction = null;
 
+    private ?string $fahrenheit = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -139,4 +140,10 @@ class Measurement
 
         return $this;
     }
+    public function getFahrenheit(): ?string
+    {
+        return strval(intval($this->temperature)*1.8+32);
+    }
+
+
 }

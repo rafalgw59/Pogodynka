@@ -8,3 +8,7 @@ weather_in_cityy:
 app_logout:
   path: /logout
   methods: GET
+
+weather_api:
+  path: /weather/api/{type}/{country}/{city}
+  controller: App\Controller\WeatherApiController:weatherTwigAction
